@@ -1,6 +1,6 @@
 # c3-go Dockerfile
 
-> Run as C3 node as a Docker container
+> Run a C3 node as a Docker container
 
 ## Instructions
 
