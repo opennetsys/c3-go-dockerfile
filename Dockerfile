@@ -15,7 +15,7 @@ RUN tar xvfz /tmp/go-ipfs.tar.gz
 RUN mv go-ipfs/ipfs /usr/local/bin/
 RUN ipfs init
 RUN ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
-RUN ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/9001
+RUN ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
 RUN ipfs daemon &
 
 # set environment path

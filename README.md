@@ -6,7 +6,7 @@
 
 ### Docker config
 
-Enable a proxy IP `123.123.123.123`
+Enable proxy IP `123.123.123.123`
 
 ```bash
 make localhostproxy
@@ -35,10 +35,22 @@ Build docker image:
 make build
 ```
 
-Help:
+Push image
 
 ```bash
-make help
+make push CONTAINERID=0fa30a2beed2 IMAGEID=hello-world
+```
+
+Pull image
+
+```bash
+make pull CONTAINERID=0fa30a2beed2 IMAGEID=QmcZy3suMS5ZyxmpSxfcc4V3ET1MPrwbsAs1twfsDpEyFW
+```
+
+### Connecting to peer
+
+```bash
+c3-go node start --pem priv.pem --uri /ip4/0.0.0.0/tcp/9005 --data-dir ~/.c3 --peer "/ip4/127.0.0.1/tcp/3330/ipfs/QmU7XFuAxfv4zmvUEzRpQKfDU1SJSbrE9HQjTwGz5fbeHw"
 ```
 
 ## License

@@ -26,7 +26,7 @@ push:
 
 .PHONY: pull
 pull:
-	@docker exec -e DOCKER_LOCAL_REGISTRY_HOST="123.123.123.123" -it $$CONTAINERID c3-go pull $$IMAGEID
+	@docker exec -it $$CONTAINERID c3-go pull $$IMAGEID --host "123.123.123.123"
 
 .PHONY: localhostproxy
 localhostproxy:
