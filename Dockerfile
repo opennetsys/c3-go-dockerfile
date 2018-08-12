@@ -1,7 +1,9 @@
 FROM golang:latest
 
-# expose ports
+# expose node ports
 EXPOSE 3330
+
+# expose registry port (may not be necessary)
 EXPOSE 5000
 
 # install docker daemon
@@ -29,6 +31,7 @@ RUN mkdir ~/.ssh
 RUN touch ~/.ssh/known_hosts
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
+# set github token environment variable
 ARG token
 ENV ENV_TOKEN=$token
 
@@ -42,8 +45,10 @@ RUN git clone https://github.com/c3systems/c3-go /go/src/github.com/c3systems/c3
 # install the program
 RUN go install github.com/c3systems/c3-go
 
+# generate a new private key
 RUN c3-go generate key -o priv.pem
 
+# copy contents to container
 COPY . /
 
 # start application
