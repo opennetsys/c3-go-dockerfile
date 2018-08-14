@@ -12,6 +12,10 @@ build:
 run:
 	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 $$IMAGEID
 
+.PHONY: run/detached
+run/detached:
+	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 -d $$IMAGEID
+
 # example:
 # $ make help CONTAINERID=fd33bf15c99d
 .PHONY: help
@@ -28,7 +32,7 @@ push:
 pull:
 	@docker exec -it $$CONTAINERID c3-go pull $$IMAGEID --host "123.123.123.123"
 
+# proxy localhost to 123.123.123.123 required so that docker container can communicate with host machine
 .PHONY: localhostproxy
 localhostproxy:
-	# proxy localhost to 123.123.123.123 required so that docker container can communicate with host machine
-	@sudo ifconfig lo0 alias 123.123.123.123/24
+	@sudo ifconfig $$(ifconfig | grep LOOPBACK | awk '{print $1}' | sed -E 's/[^a-zA-Z0-9]+//g') 123.123.123.123/24
