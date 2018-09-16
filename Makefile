@@ -6,15 +6,17 @@ all: build
 build:
 	@docker build -t c3go --build-arg token="$$GITHUB_TOKEN" .
 
+# port 5005 is the rpc service
+# port 3330 is the p2p service
 # example:
 # $ make run IMAGEID=2380c1928723
 .PHONY: run
 run:
-	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 $$IMAGEID
+	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 -p 5005:5005 $$IMAGEID
 
 .PHONY: run/detached
 run/detached:
-	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 -d $$IMAGEID
+	@docker run -v /var/run/docker.sock:/var/run/docker.sock -p 3330:3330 -p 5000:5000 -p 5005:5005 -d $$IMAGEID
 
 # example:
 # $ make help CONTAINERID=fd33bf15c99d
