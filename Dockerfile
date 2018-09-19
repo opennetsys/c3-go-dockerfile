@@ -52,4 +52,4 @@ RUN c3-go generate key -o priv.pem
 COPY . /
 
 # start application
-CMD . /start.sh
+CMD /entrypoint.sh
